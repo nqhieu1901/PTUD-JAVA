@@ -1,0 +1,43 @@
+{
+  "runId": "smarttask-ui-20260824",
+  "fileKey": "diqvLTfv2YfNq2FjEJN0V1",
+  "fileUrl": "https://www.figma.com/design/diqvLTfv2YfNq2FjEJN0V1",
+  "phase": "P0_DISCOVERY",
+  "source": {
+    "frontend": "frontend/src",
+    "url": "http://localhost:5173/",
+    "framework": "React 19 + Vite 7",
+    "codeConnect": "none",
+    "externalImages": "none",
+    "fonts": ["Inter", "Georgia"]
+  },
+  "figma": {
+    "pageId": "0:1",
+    "pageName": "Page 1",
+    "localVariables": 0,
+    "localStyles": 0,
+    "localComponents": 0,
+    "interAvailable": true,
+    "georgiaAvailable": false
+  },
+  "libraryDiscovery": {
+    "subscribed": ["Material 3 Design Kit", "Simple Design System", "iOS and iPadOS 26", "watchOS 26", "visionOS 26", "macOS 26", "iOS and iPadOS 27", "macOS 27"],
+    "matchingSimpleDesignAssets": ["Button", "Icon Button", "Input Field", "Select Field", "Card", "Sidebar", "Calendar"],
+    "decision": "Build local SmartTask components because the subscribed systems do not match the source palette, typography, radii, or component anatomy."
+  },
+  "proposedScope": {
+    "pages": ["01 Foundations", "02 Components", "03 Desktop", "04 Mobile"],
+    "desktopFrames": ["Auth / Login", "Auth / Register", "Workspace / Kanban", "Workspace / Dashboard", "Workspace / Calendar", "Workspace / AI Assistant", "Workspace / Empty project"],
+    "mobileFrames": ["Workspace / Kanban mobile"],
+    "overlaysAsVariants": ["Notification panel", "Project modal", "Task modal", "Members modal", "Toast", "Loading", "Error", "Empty", "Archived", "Dragging"]
+  },
+  "gaps": [
+    "Georgia is unavailable in Figma; proposed fallback is Libre Caslon Text.",
+    "Spacing and several literal colors are not tokenized in CSS.",
+    "Icons mix Unicode glyphs, one inline SVG, and CSS shapes.",
+    "No local Code Connect mappings exist.",
+    "No seeded demo account or populated capture state exists."
+  ],
+  "createdNodeIds": [],
+  "updatedAt": "2026-08-24"
+}

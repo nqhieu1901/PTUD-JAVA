@@ -1,0 +1,38 @@
+CREATE TABLE boards (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    project_id BIGINT NOT NULL,
+    name VARCHAR(120) NOT NULL,
+    display_order INT NOT NULL,
+    version BIGINT NOT NULL DEFAULT 0,
+    created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    updated_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+    CONSTRAINT pk_boards PRIMARY KEY (id),
+    CONSTRAINT uq_boards_project_name UNIQUE (project_id, name),
+    CONSTRAINT uq_boards_project_order UNIQUE (project_id, display_order),
+    CONSTRAINT ck_boards_name CHECK (CHAR_LENGTH(TRIM(name)) > 0),
+    CONSTRAINT ck_boards_display_order CHECK (display_order > 0),
+    CONSTRAINT fk_boards_project FOREIGN KEY (project_id)
+        REFERENCES projects (id) ON DELETE RESTRICT
+);
+
+CREATE INDEX idx_boards_project_order ON boards (project_id, display_order);
+
+INSERT INTO boards (project_id, name, display_order)
+SELECT project.id, 'Bảng chính', 1
+FROM projects project
+WHERE NOT EXISTS (
+    SELECT 1 FROM boards board WHERE board.project_id = project.id
+);
+
+ALTER TABLE tasks ADD COLUMN board_id BIGINT NULL AFTER project_id;
+
+UPDATE tasks task
+JOIN boards board
+  ON board.project_id = task.project_id
+ AND board.display_order = 1
+SET task.board_id = board.id;
+
+CREATE INDEX idx_tasks_board_status_order
+    ON tasks (board_id, status_id);
+ALTER TABLE tasks ADD CONSTRAINT fk_tasks_board FOREIGN KEY (board_id)
+    REFERENCES boards (id) ON DELETE RESTRICT;
